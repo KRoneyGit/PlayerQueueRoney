@@ -7,13 +7,15 @@ namespace PlayerQueueRoney.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private IPlayerQueue model;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IPlayerQueue mdl)
         {
             _logger = logger;
+            model = mdl;
         }
         
-        PlayerQueue model = new PlayerQueue();
+        //PlayerQueue model = new PlayerQueue();
 
         [HttpGet]
         public IActionResult Index()

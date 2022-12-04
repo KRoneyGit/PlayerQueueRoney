@@ -1,10 +1,10 @@
 ﻿namespace PlayerQueueRoney.Models
 {
-    public class PlayerQueue
+    public class PlayerQueue : IPlayerQueue
     {
         public string name { get; set; }
 
-        public Player newPlayer { get; set; }
+        public Player? newPlayer { get; set; }
         public Player[] queue { get; set; }
 
         public List<Player> allPlayers { get; set; }
