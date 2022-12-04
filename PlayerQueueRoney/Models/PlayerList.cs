@@ -2,14 +2,25 @@
 {
     public class PlayerList : IPlayerList
     {
-        public List<Player> players { get; set; }
-        public List<Player> allPlayers { get; set; }
-        public string newPlayer { get; set; }
+        public Player? toRemove { get; set; }
+        public List<Player>? players { get; set; }
+        public List<Player>? allPlayers { get; set; }
+        public string? name { get; set; }
+
+        public PlayerList()
+        {
+            players = new List<Player>();
+        }
 
         public void addPlayer(Player player)
         {
             players.Add(player);
-            if (!allPlayers.Contains(player))
+            if (allPlayers == null)
+            {
+                allPlayers = new List<Player>();
+                allPlayers.Add(player);
+            }
+            else if (!allPlayers.Contains(player))
             {
                 allPlayers.Add(player);
             }
@@ -23,9 +34,10 @@
             players.RemoveAt(0);
         }
 
-        public void removePlayer(int index)
+        public void removePlayer(Player toRemove)
         {
-            players.RemoveAt(index);
+            
+            players.RemoveAt(players.IndexOf(toRemove));
         }
     }
 }

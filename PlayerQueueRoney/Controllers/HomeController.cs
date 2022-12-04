@@ -7,9 +7,9 @@ namespace PlayerQueueRoney.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private IPlayerQueue model;
+        private IPlayerList model;
 
-        public HomeController(ILogger<HomeController> logger, IPlayerQueue mdl)
+        public HomeController(ILogger<HomeController> logger, IPlayerList mdl)
         {
             _logger = logger;
             model = mdl;
@@ -20,13 +20,13 @@ namespace PlayerQueueRoney.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            ViewBag.currentPlayers = model.currentQueue();
+            //ViewBag.currentPlayers = model.currentQueue();
             
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Add(PlayerQueue viewModel)
+        public IActionResult Add(PlayerList viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -43,6 +43,16 @@ namespace PlayerQueueRoney.Controllers
             if (ModelState.IsValid)
             {
                 model.nextPlayer();
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Remove(PlayerList viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                model.removePlayer(viewModel.toRemove);
             }
             return RedirectToAction("Index");
         }
