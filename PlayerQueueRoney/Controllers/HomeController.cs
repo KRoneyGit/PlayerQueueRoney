@@ -14,20 +14,10 @@ namespace PlayerQueueRoney.Controllers
         }
         
         PlayerQueue model = new PlayerQueue();
-        
-        //Player kevin = new Player("Kevin");
-        //Player kassi = new Player("Kassi");
-        //Player quinn = new Player("Quinn");
-        //Player dwayne = new Player("Dwayne");
-        //Player whitty = new Player("Whitty");
+
         [HttpGet]
         public IActionResult Index()
         {
-            //model.addPlayer(kevin);
-            //model.addPlayer(kassi);
-            //model.addPlayer(quinn);
-            //model.addPlayer(dwayne);
-            //model.addPlayer(whitty);
             ViewBag.currentPlayers = model.currentQueue();
             
             return View(model);

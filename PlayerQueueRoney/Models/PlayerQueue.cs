@@ -4,14 +4,14 @@
     {
         public string name { get; set; }
 
-        public Player newPlayer;
-        public Player[] queue;
+        public Player newPlayer { get; set; }
+        public Player[] queue { get; set; }
 
-        public List<Player> allPlayers;
+        public List<Player> allPlayers { get; set; }
 
-        public int head;
-        public int tail;
-        public int size;
+        public int head { get; set; }
+        public int tail { get; set; }
+        public int size { get; set; }
 
 
         public PlayerQueue()
