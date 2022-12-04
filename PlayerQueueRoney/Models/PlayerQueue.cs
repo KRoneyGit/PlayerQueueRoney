@@ -46,7 +46,8 @@
             }
             else if (!isFull())
             {
-                queue[++tail % queue.Length] = player;
+                tail = ++tail % queue.Length;
+                queue[tail] = player;
                 size++;
             }
             else if (isFull())
@@ -123,7 +124,7 @@
             }
             else if (head == 0)
             {
-                for (int i = 0; i < queue.Length; i++)
+                for (int i = 0; i <= tail; i++)
                 {
                     currentOrder.Add(queue[i]);
                 }

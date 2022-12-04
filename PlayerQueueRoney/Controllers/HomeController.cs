@@ -37,6 +37,16 @@ namespace PlayerQueueRoney.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public IActionResult Next()
+        {
+            if (ModelState.IsValid)
+            {
+                model.nextPlayer();
+            }
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Privacy()
         {
             return View();
