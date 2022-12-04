@@ -18,7 +18,6 @@ namespace PlayerQueueRoney.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            model = new PlayerQueue();
             ViewBag.currentPlayers = model.currentQueue();
             
             return View(model);
