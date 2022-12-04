@@ -10,8 +10,9 @@
                 {
                     @foreach (Player player in Model.players)
                     {
-                        <input hidden="hidden" asp-for="toRemove" value="@player" />
-                        <p>@player.name<button asp-for="toRemove" value="@player" type="submit">Remove</button></p>
+                       @* <input hidden="hidden" asp-for="toRemove" value="@player" />
+                        <button asp-for="toRemove" value="@player" type="submit">Remove</button>*@
+                        <p>@player.name</p>
                     }
                 }
             </form>
