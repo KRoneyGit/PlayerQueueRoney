@@ -1,0 +1,22 @@
+﻿@model PlayerQueue;
+@{
+
+}
+<body>
+    <div class="text-center">
+        <div class="col-6">
+            @for (int i = 0; i < Model.size; i++)
+            {
+                <p>@Model.currentQueue()[i].name</p>
+            }
+        </div>
+        <div class="col-6">
+            <form asp-action="Add" method="post">
+                <label asp-for="name" class="control-label">Add a new player:</label>
+                <input asp-for="name" class="form-control" />
+                <button type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+</body>
+
