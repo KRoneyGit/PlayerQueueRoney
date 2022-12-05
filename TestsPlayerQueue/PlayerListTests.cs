@@ -13,7 +13,7 @@ namespace TestsPlayerQueue
             list.addPlayer(new Player("Kevin"));
 
             string expected = "Kevin";
-            String actual = list.players[0].name;
+            string actual = list.players[0].name;
 
             Assert.Equal(expected, actual);
         }
