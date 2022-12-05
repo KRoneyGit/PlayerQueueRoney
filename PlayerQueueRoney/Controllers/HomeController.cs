@@ -15,13 +15,16 @@ namespace PlayerQueueRoney.Controllers
             model = mdl;
         }
         
-        //PlayerQueue model = new PlayerQueue();
 
         [HttpGet]
         public IActionResult Index()
         {
-            //ViewBag.currentPlayers = model.currentQueue();
-            
+            if (model.allPlayers.size > 0)
+            {
+                PlayerHeap temp = model.allPlayers;
+                Player[] sorted = temp.heapSort();
+                ViewBag.TotalTurns = sorted;
+            }
             return View(model);
         }
 
@@ -30,7 +33,6 @@ namespace PlayerQueueRoney.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.TotalTurns = model.allPlayers.heapSort();
                 Player toAdd = new Player(viewModel.name);
                 model.addPlayer(toAdd);
             }

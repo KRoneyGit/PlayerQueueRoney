@@ -2,50 +2,60 @@
 @{
 
 }
+<style>
+    .playerlist{
+        text-align: right;
+    }
+</style>
 <body>
     <div class="text-center row">
-        <div class="col-6">
-            <div>
+            <div class="col-5">
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <form asp-action="Add" method="post">
+                    <label asp-for="name" class="control-label">Add a new player:</label>
+                    <input class="col-3" maxlength="30" asp-for="name" class="form-control" />
+                    <button type="submit">Add</button>
+                </form>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <form asp-action="Next" method="post">
+                    <button type="submit">Next Player</button>
+                </form>
+            </div>
+        <div class="col-2">
+            <div class="playerlist">
                 <form asp-action="Remove" method="post">
                     @if (Model.players != null)
                     {
                         @foreach (Player player in Model.players)
                         {
                             <input hidden="hidden" asp-for="toRemove" value="@player" class="form-control" />
-                            <button type="submit">Remove</button>
-                            <p>@player.name</p>
+                            
+                            <p>@player.name    <button type="submit">Remove</button></p>
                         }
                     }
                 </form>
+            </div>
 
-    @*            @for (int i = 0; i < Model.size; i++)
-                {
-                    <p>@Model.currentQueue()[i].name</p>
-                }*@
-            </div>
-            <div>
-                <form asp-action="Add" method="post">
-                    <label asp-for="name" class="control-label">Add a new player:</label>
-                    <input class="col-3" maxlength="20" asp-for="name" class="form-control" />
-                    <button type="submit">Add</button>
-                </form>
-                <form asp-action="Next" method="post">
-                    <button type="submit">Next Player</button>
-                </form>
-            </div>
         </div>
-        <div class="col-6">
+        <div class="col-4">
             <div>
-                @if (ViewBag.TotalTurns[0] != null)
+            <div>
+                @if (Model.allPlayers.size > 0)
                 {
-                    @for (int i = 0; i < ViewBag.TotalTurns.Length; i++)
+                    @for (int i = 0; i < Model.allPlayers.size; i++)
                     {
-                        <p>@ViewBag.TotalTurns[i].name @ViewBag.TotalTurns[i].totalTurns</p>
+                        <p>@ViewBag.TotalTurns[i].name has played @ViewBag.TotalTurns[i].totalTurns times</p>
                     }
-@*                    @for (int i = 0; i < Model.allPlayers.size; i++)
-                    {
-                        <p>@Model.allPlayers.playerHeap[i].name @Model.allPlayers.playerHeap[i].totalTurns</p>
-                    }*@
                 }
             </div>
         </div>

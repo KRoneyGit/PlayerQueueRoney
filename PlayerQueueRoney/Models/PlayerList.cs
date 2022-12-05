@@ -17,15 +17,18 @@ namespace PlayerQueueRoney.Models
 
         public void addPlayer(Player player)
         {
-            players.Add(player);
-            if (allPlayers == null)
+            if (player.name != null)
             {
-                allPlayers = new PlayerHeap();
-                allPlayers.add(player);
-            }
-            else if (!allPlayers.playerHeap.Contains(player))
-            {
-                allPlayers.add(player);
+                players.Add(player);
+                if (allPlayers == null)
+                {
+                    allPlayers = new PlayerHeap();
+                    allPlayers.add(player);
+                }
+                else if (!allPlayers.playerHeap.Contains(player))
+                {
+                    allPlayers.add(player);
+                }
             }
         }
 
@@ -33,7 +36,17 @@ namespace PlayerQueueRoney.Models
         {
             if (players.Count != 0)
             {
-                allPlayers.playerHeap[Array.IndexOf(allPlayers.playerHeap, players[0])].totalTurns++;
+                for (int i = 0; i < allPlayers.size; i++)
+                {
+                    if (allPlayers.playerHeap[i].name == players[0].name)
+                    {
+                        allPlayers.playerHeap[i].totalTurns++;
+                        allPlayers.heapifyUp();
+                        allPlayers.heapifyDown();
+                    }
+                }
+                //int index = Array.IndexOf(allPlayers.playerHeap, players[0]);
+                //allPlayers.playerHeap[index].totalTurns++;
                 players.Add(players[0]);
                 players.RemoveAt(0);
             }

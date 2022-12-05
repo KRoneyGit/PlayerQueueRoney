@@ -175,11 +175,17 @@ namespace PlayerQueueRoney.Models
                 throw new NodeNullException();
             }
             Player[] sorted = new Player[size];
+            PlayerHeap temp = new PlayerHeap();
+            temp = this;
             int index = 0;
             while (size > 0)
             {
-                sorted[index] = this.pull();
+                sorted[index] = temp.pull();
                 index++;
+            }
+            foreach (Player player in sorted)
+            {
+                add(player);
             }
             return sorted;
         }
