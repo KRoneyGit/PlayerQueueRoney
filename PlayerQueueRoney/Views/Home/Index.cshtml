@@ -37,7 +37,6 @@
         </div>
         <div class="col-2">
             <div class="playerlist">
-                <form asp-action="Remove" method="post">
                     <br />
                     <br />
                     <br />
@@ -46,13 +45,14 @@
                     {
                         <h3 style="text-align: center;">Order of Players</h3>
                         @foreach (Player player in Model.players)
-                        {
-                            <input hidden="hidden" asp-for="name" value="@player.name" class="form-control" />
+                    {
+                            <form asp-action="Remove" method="post">
+                                <input hidden="hidden" asp-for="name" value="@player.name" class="form-control" />
                             
-                            <p>@player.name    <button class="alert-danger" type="submit">Remove</button></p>
+                                <p>@player.name    <button class="alert-danger" type="submit">Remove</button></p>
+                            </form>
                         }
                     }
-                </form>
             </div>
 
         </div>
