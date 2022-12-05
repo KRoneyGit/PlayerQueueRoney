@@ -38,9 +38,9 @@
             <div>
                 @if (Model.allPlayers != null)
                 {
-                    @foreach (Player player in Model.allPlayers)
+                    @for (int i = 0; i < Model.allPlayers.size; i++)
                     {
-                        <p>@player.name @player.totalTurns</p>
+                                <p>@Model.allPlayers.playerHeap[i].name @Model.allPlayers.playerHeap[i].totalTurns</p>
                     }
                 }
             </div>

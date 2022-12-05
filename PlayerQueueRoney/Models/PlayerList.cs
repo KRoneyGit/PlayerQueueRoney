@@ -4,7 +4,7 @@
     {
         public Player? toRemove { get; set; }
         public List<Player>? players { get; set; }
-        public List<Player>? allPlayers { get; set; }
+        public PlayerHeap? allPlayers { get; set; }
         public string? name { get; set; }
 
         public PlayerList()
@@ -17,20 +17,23 @@
             players.Add(player);
             if (allPlayers == null)
             {
-                allPlayers = new List<Player>();
-                allPlayers.Add(player);
+                allPlayers = new PlayerHeap();
+                allPlayers.add(player);
             }
-            else if (!allPlayers.Contains(player))
+            else if (!allPlayers.playerHeap.Contains(player))
             {
-                allPlayers.Add(player);
+                allPlayers.add(player);
             }
         }
 
         public void nextPlayer()
         {
-            allPlayers[allPlayers.IndexOf(players[0])].totalTurns++;
-            players.Add(players[0]);
-            players.RemoveAt(0);
+            if (players.Count != 0)
+            {
+                allPlayers.playerHeap[Array.IndexOf(allPlayers.playerHeap, players[0])].totalTurns++;
+                players.Add(players[0]);
+                players.RemoveAt(0);
+            }
         }
 
         public void removePlayer(Player toRemove)
