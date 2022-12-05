@@ -1,4 +1,6 @@
-﻿namespace PlayerQueueRoney.Models
+﻿using PlayerQueueRoney.Exceptions;
+
+namespace PlayerQueueRoney.Models
 {
     public class PlayerList : IPlayerList
     {
@@ -10,6 +12,7 @@
         public PlayerList()
         {
             players = new List<Player>();
+            allPlayers = new PlayerHeap();
         }
 
         public void addPlayer(Player player)
@@ -34,11 +37,22 @@
                 players.Add(players[0]);
                 players.RemoveAt(0);
             }
+            else
+            {
+                throw new QueueEmptyException();
+            }
         }
 
         public void removePlayer(Player toRemove)
         {
-            
+            if (players.Count == 0)
+            {
+                throw new QueueEmptyException();
+            }
+            else if (!players.Contains(toRemove))
+            {
+                throw new NotInQueueException();
+            }
             players.RemoveAt(players.IndexOf(toRemove));
         }
     }

@@ -1,13 +1,20 @@
-﻿using System;
+﻿using PlayerQueueRoney.Exceptions;
+using System;
+using System.ComponentModel;
 
 namespace PlayerQueueRoney.Models
 {
     public class PlayerHeap
     {
-        static public int capacity = 10;
+        public int capacity;
         public int size = 0;
+        public Player[] playerHeap;
 
-        public Player[] playerHeap = new Player[capacity];
+        public PlayerHeap() 
+        {
+            capacity = 5;
+            playerHeap = new Player[capacity];
+        }
 
         public int getLeftChildIndex(int parentIndex)
         {
@@ -19,6 +26,12 @@ namespace PlayerQueueRoney.Models
         }
         public int getParentIndex(int childIndex)
         {
+            double child = childIndex;
+            if ((child - 1) / 2 < 0)
+            {
+                return -1;
+            }
+
             return (childIndex - 1) / 2;
         }
 
@@ -37,25 +50,41 @@ namespace PlayerQueueRoney.Models
 
         public Player leftChild(int index)
         {
+            if (!hasLeftChild(index))
+            {
+                throw new NodeNullException();
+            }
             return playerHeap[getLeftChildIndex(index)];
         }
         public Player rightChild(int index)
         {
+            if (!hasRightChild(index))
+            {
+                throw new NodeNullException();
+            }
             return playerHeap[getRightChildIndex(index)];
         }
         public Player parent(int index)
         {
+            if (!hasParent(index))
+            {
+                throw new NodeNullException();
+            }
             return playerHeap[getParentIndex(index)];
         }
 
         public void swap(int indexOne, int indexTwo)
         {
+            if (playerHeap[indexOne] == null || playerHeap[indexTwo] == null)
+            {
+                throw new NodeNullException();
+            }
             Player temp = playerHeap[indexOne];
             playerHeap[indexOne] = playerHeap[indexTwo];
             playerHeap[indexTwo] = temp;
         }
 
-        private void ensureExtraCapacity()
+        public void ensureExtraCapacity()
         {
             if (size == capacity)
             {
@@ -71,7 +100,11 @@ namespace PlayerQueueRoney.Models
 
         public Player peek()
         {
-            if (size == 0)
+            if (playerHeap[0] == null)
+            {
+                throw new NodeNullException();
+            }
+            else if (size == 0)
             {
                 return new Player();
             }
@@ -80,7 +113,11 @@ namespace PlayerQueueRoney.Models
 
         public Player pull()
         {
-            if (size == 0)
+            if (playerHeap[0] == null)
+            {
+                throw new NodeNullException();
+            }
+            else if (size == 0)
             {
                 return new Player();
             }
@@ -133,6 +170,10 @@ namespace PlayerQueueRoney.Models
 
         public Player[] heapSort()
         {
+            if (playerHeap[0] == null)
+            {
+                throw new NodeNullException();
+            }
             Player[] sorted = new Player[size];
             int index = 0;
             while (size > 0)

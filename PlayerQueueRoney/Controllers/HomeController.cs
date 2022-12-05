@@ -30,6 +30,7 @@ namespace PlayerQueueRoney.Controllers
         {
             if (ModelState.IsValid)
             {
+                ViewBag.TotalTurns = model.allPlayers.heapSort();
                 Player toAdd = new Player(viewModel.name);
                 model.addPlayer(toAdd);
             }

@@ -36,12 +36,16 @@
         </div>
         <div class="col-6">
             <div>
-                @if (Model.allPlayers != null)
+                @if (ViewBag.TotalTurns[0] != null)
                 {
-                    @for (int i = 0; i < Model.allPlayers.size; i++)
+                    @for (int i = 0; i < ViewBag.TotalTurns.Length; i++)
                     {
-                                <p>@Model.allPlayers.playerHeap[i].name @Model.allPlayers.playerHeap[i].totalTurns</p>
+                        <p>@ViewBag.TotalTurns[i].name @ViewBag.TotalTurns[i].totalTurns</p>
                     }
+@*                    @for (int i = 0; i < Model.allPlayers.size; i++)
+                    {
+                        <p>@Model.allPlayers.playerHeap[i].name @Model.allPlayers.playerHeap[i].totalTurns</p>
+                    }*@
                 }
             </div>
         </div>
