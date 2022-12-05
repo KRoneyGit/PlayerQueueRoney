@@ -29,7 +29,6 @@
         public void nextPlayer()
         {
             allPlayers[allPlayers.IndexOf(players[0])].totalTurns++;
-            players[0].totalTurns++;
             players.Add(players[0]);
             players.RemoveAt(0);
         }

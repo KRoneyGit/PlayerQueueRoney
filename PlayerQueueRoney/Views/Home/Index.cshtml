@@ -4,33 +4,46 @@
 }
 <body>
     <div class="text-center row">
-        <div>
-            <form asp-action="Remove" method="post">
-                @if (Model.players != null)
-                {
-                    @foreach (Player player in Model.players)
+        <div class="col-6">
+            <div>
+                <form asp-action="Remove" method="post">
+                    @if (Model.players != null)
                     {
-                        <input hidden="hidden" asp-for="toRemove" value="@player" />
-                        <button asp-for="toRemove" value="@player" type="submit">Remove</button>
-                        <p>@player.name</p>
+                        @foreach (Player player in Model.players)
+                        {
+                            <input hidden="hidden" asp-for="toRemove" value="@player" class="form-control" />
+                            <button type="submit">Remove</button>
+                            <p>@player.name</p>
+                        }
+                    }
+                </form>
+
+    @*            @for (int i = 0; i < Model.size; i++)
+                {
+                    <p>@Model.currentQueue()[i].name</p>
+                }*@
+            </div>
+            <div>
+                <form asp-action="Add" method="post">
+                    <label asp-for="name" class="control-label">Add a new player:</label>
+                    <input class="col-3" maxlength="20" asp-for="name" class="form-control" />
+                    <button type="submit">Add</button>
+                </form>
+                <form asp-action="Next" method="post">
+                    <button type="submit">Next Player</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-6">
+            <div>
+                @if (Model.allPlayers != null)
+                {
+                    @foreach (Player player in Model.allPlayers)
+                    {
+                        <p>@player.name @player.totalTurns</p>
                     }
                 }
-            </form>
-
-@*            @for (int i = 0; i < Model.size; i++)
-            {
-                <p>@Model.currentQueue()[i].name</p>
-            }*@
-        </div>
-        <div>
-            <form asp-action="Add" method="post">
-                <label asp-for="name" class="control-label">Add a new player:</label>
-                <input class="col-3" maxlength="20" asp-for="name" class="form-control" />
-                <button type="submit">Add</button>
-            </form>
-            <form asp-action="Next" method="post">
-                <button type="submit">Next Player</button>
-            </form>
+            </div>
         </div>
     </div>
 </body>
