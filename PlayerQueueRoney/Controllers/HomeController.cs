@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PlayerQueueRoney.Models;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace PlayerQueueRoney.Controllers
 {
@@ -38,9 +39,20 @@ namespace PlayerQueueRoney.Controllers
             //check if modelState is valid before trying to add a player
             if (ModelState.IsValid)
             {
-                //creates a temporary player to pass to addPlayer method, and then adds that player with method
-                Player toAdd = new Player(viewModel.name);
-                model.addPlayer(toAdd);
+                //check if name property is null and if it contains only letters
+                if (viewModel.name != null && viewModel.name.All(Char.IsLetter))
+                {
+                    //sets errorMessage to be blank because user input was correct
+                    model.errorMessage = "";
+                    //creates a temporary player to pass to addPlayer method, and then adds that player with method
+                    Player toAdd = new Player(viewModel.name);
+                    model.addPlayer(toAdd);
+                }
+                else
+                {
+                    //sets error message to tell user to only enter a name with only letters
+                    model.errorMessage = "Please enter a name containing only letters";
+                }
             }
             //redirects to index view as this is a single page app
             return RedirectToAction("Index");

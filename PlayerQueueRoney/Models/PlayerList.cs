@@ -1,4 +1,5 @@
 ﻿using PlayerQueueRoney.Exceptions;
+using System.ComponentModel.DataAnnotations;
 
 namespace PlayerQueueRoney.Models
 {
@@ -9,9 +10,11 @@ namespace PlayerQueueRoney.Models
         //List<Player> for a list of current players
         //PlayerHeap for a heap of all players, even those not in queue
         //name to use as parameter for removing players from queue
+        //error message to output error to user for name input
         public List<Player>? players { get; set; }
         public PlayerHeap? allPlayers { get; set; }
         public string? name { get; set; }
+        public string? errorMessage { get; set; }
 
         //constructor for creating an empty PlayerList
         public PlayerList()
@@ -21,7 +24,8 @@ namespace PlayerQueueRoney.Models
         }
 
         //method for adding players to PlayerList
-        //starts by checking if the new player that is being added has a null value in their name property
+        //starts by taking the input name and changing it to have an inital uppercase letter followed by lower case
+        //continues by checking if the new player that is being added has a null value in their name property
         //if it is not null, a flag variable called found is initialized to determine if the name is found in the current queue
         //if the list of players has a count of zero, the player is added with the List Add method
         //otherwise a foreach loop is made to check all players in the list
@@ -39,6 +43,7 @@ namespace PlayerQueueRoney.Models
         //after the loop a check is made if found is true or not, if not the player is added to the heap
         public void addPlayer(Player player)
         {
+            player.name = player.name.Substring(0,1).ToUpper() + player.name.Substring(1).ToLower();
             if (player.name != null)
             {
                 bool found = false;
