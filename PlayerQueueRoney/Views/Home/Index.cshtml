@@ -9,28 +9,28 @@
 </style>
 <body>
     <div class="text-center row">
-            <div class="col-5">
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <form asp-action="Add" method="post">
-                    <label asp-for="name" class="control-label">Add a new player:</label>
-                    <input class="col-3" maxlength="30" asp-for="name" class="form-control" />
-                    <button type="submit">Add</button>
-                </form>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <form asp-action="Next" method="post">
-                    <button type="submit">Next Player</button>
-                </form>
-            </div>
+        <div class="col-5">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <form asp-action="Add" method="post">
+                <label asp-for="name" class="control-label">Add a new player:</label>
+                <input class="col-3" maxlength="30" asp-for="name" class="form-control" />
+                <button type="submit">Add</button>
+            </form>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <form asp-action="Next" method="post">
+                <button type="submit">Next Player</button>
+            </form>
+        </div>
         <div class="col-2">
             <div class="playerlist">
                 <form asp-action="Remove" method="post">
@@ -38,7 +38,7 @@
                     {
                         @foreach (Player player in Model.players)
                         {
-                            <input hidden="hidden" asp-for="toRemove" value="@player" class="form-control" />
+                            <input hidden="hidden" asp-for="name" value="@player.name" class="form-control" />
                             
                             <p>@player.name    <button type="submit">Remove</button></p>
                         }
@@ -48,7 +48,6 @@
 
         </div>
         <div class="col-4">
-            <div>
             <div>
                 @if (Model.allPlayers.size > 0)
                 {

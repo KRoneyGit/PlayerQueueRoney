@@ -38,7 +38,7 @@ namespace TestsPlayerQueue
             list.addPlayer(new Player("Kevin"));
             list.addPlayer(new Player("Michelle"));
 
-            list.removePlayer(list.players[0]);
+            list.removePlayer("Kevin");
 
             string expected = "Michelle";
             string actual = list.players[0].name;
@@ -50,9 +50,9 @@ namespace TestsPlayerQueue
         public void testRemoveFromEmpty()
         {
             PlayerList list = new PlayerList();
-            Player player = new Player("Kevin");
+            string name = "Kevin";
 
-            Assert.Throws<QueueEmptyException>(() => list.removePlayer(player));
+            Assert.Throws<QueueEmptyException>(() => list.removePlayer(name));
         }
 
         [Fact]
@@ -61,12 +61,12 @@ namespace TestsPlayerQueue
             PlayerList list = new PlayerList();
             Player player1 = new Player("Kevin");
             Player player2 = new Player("Michelle");
-            Player player3 = new Player("Evan");
+            string name = "Evan";
 
             list.addPlayer(player1);
             list.addPlayer(player2);
 
-            Assert.Throws<NotInQueueException>(() => list.removePlayer(player3));
+            Assert.Throws<NotInQueueException>(() => list.removePlayer(name));
         }
 
         [Fact]
