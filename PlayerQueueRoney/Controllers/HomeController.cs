@@ -25,9 +25,16 @@ namespace PlayerQueueRoney.Controllers
             {
                 //creates a temporary PlayerHeap to sort and then creates a Player array to send heapSort to
                 //it then assigns that value to a ViewBag value to use in the view
+                //next it creates a list of names to compare active queue and all players in the view
                 PlayerHeap temp = model.allPlayers;
                 Player[] sorted = temp.heapSort();
                 ViewBag.TotalTurns = sorted;
+                List<string> list = new List<string>();
+                foreach (Player player in model.players)
+                {
+                    list.Add(player.name);
+                }
+                ViewBag.ViewList = list;
             }
             //returns the view and passes model to it
             return View(model);

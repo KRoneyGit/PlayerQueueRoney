@@ -65,10 +65,27 @@
                 <br />
                 @if (Model.allPlayers.size > 0)
                 {
-                    <h3>All Players</h3>
+                    <h3 style="padding-left: 70px">All Players</h3>
                     @for (int i = 0; i < Model.allPlayers.size; i++)
                     {
-                        <p>@ViewBag.TotalTurns[i].name has played @ViewBag.TotalTurns[i].totalTurns times</p>
+                        <form asp-action="Add" method="post">
+                            <p>
+                                <input hidden="hidden" asp-for="name" value="@ViewBag.TotalTurns[i].name" class="form-control">
+                                @if (!ViewBag.ViewList.Contains(ViewBag.TotalTurns[i].name))
+                                {
+                                    <div style="text-align: left">
+                                        <button class="alert-success" type="submit">Add back to queue</button>
+                                        @ViewBag.TotalTurns[i].name has played @ViewBag.TotalTurns[i].totalTurns times
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div style="text-align: left; padding-left: 155px">
+                                        @ViewBag.TotalTurns[i].name has played @ViewBag.TotalTurns[i].totalTurns times
+                                    </div>
+                                }
+                            </p>
+                        </form>
                     }
                 }
             </div>
